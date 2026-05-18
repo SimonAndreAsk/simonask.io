@@ -2,12 +2,34 @@
 
 Personal blog and Sanity CMS for [simonask.io](https://simonask.io).
 
+| Site | Branch | URL |
+|------|--------|-----|
+| Production | `main` | [simonask.io](https://simonask.io) |
+| Staging | `staging` | [stage.simonask.io](https://stage.simonask.io) |
+
+**GitHub:** [SimonAndreAsk/simon-ask-personal-project](https://github.com/SimonAndreAsk/simon-ask-personal-project)
+
 ## Repository structure
 
 | Folder | Purpose |
 |--------|---------|
-| `nextjs-simonask.io/` | Public website (Next.js) |
+| `nextjs-simonask.io/` | Public website (Next.js 16) |
 | `studio-simonask.io/` | Sanity Studio (content editing) |
+
+## How code and content ship
+
+**Code** (layout, features) follows Git:
+
+1. Work on `staging` → deploys to **stage.simonask.io**
+2. Merge `staging` → `main` → deploys to **simonask.io**
+
+**Articles** follow Sanity:
+
+1. Write in Studio → **Save** (draft)
+2. Preview on staging (and in Studio **Presentation**)
+3. **Publish** in Studio → live on **simonask.io** (webhook revalidates the site)
+
+Draft posts are visible on staging only, not on production.
 
 ## Prerequisites
 
@@ -21,6 +43,7 @@ Personal blog and Sanity CMS for [simonask.io](https://simonask.io).
 ```bash
 cd nextjs-simonask.io
 npm install
+cp .env.example .env.local   # add SANITY_API_READ_TOKEN for draft preview
 npm run dev
 ```
 
@@ -31,31 +54,26 @@ Open [http://localhost:3000](http://localhost:3000).
 ```bash
 cd studio-simonask.io
 npm install
+cp .env.example .env.local   # optional: SANITY_STUDIO_PREVIEW_ORIGIN
 npm run dev
 ```
 
-Open the URL shown in the terminal (usually [http://localhost:3333](http://localhost:3333)).
-
-You can also manage content at [sanity.io/manage](https://www.sanity.io/manage) → project **au2uzesy**.
+Open [http://localhost:3333](http://localhost:3333). Manage the project at [sanity.io/manage](https://www.sanity.io/manage) → **au2uzesy**.
 
 ## Environment variables and secrets
 
 - **Do not commit** `.env`, `.env.local`, API tokens, or private keys.
-- These patterns are listed in `.gitignore` at the repo root and in each app folder.
-- The Sanity **project ID** and **dataset** in code are public identifiers (safe to commit). They are not secret.
-- Optional tokens (e.g. preview or write access) belong only in local `.env` files or in your host’s environment settings — see `.env.example` in each app folder.
+- The Sanity **project ID** (`au2uzesy`) and **dataset** (`production`) are public identifiers.
+- **Viewer token** and **revalidate secret** are required for draft preview and fast publish — see `.env.example` in each app folder and `nextjs-simonask.io/README.md`.
 
-## Deployment (overview)
+## Deployment
 
-Recommended: **Vercel** (website) + **Cloudflare** (DNS for `simonask.io`).
+- **Vercel** — import repo, **Root Directory** `nextjs-simonask.io`
+- **Domains** — `simonask.io` on Production (`main`); `stage.simonask.io` on Preview (`staging`)
+- **DNS** — Cloudflare pointing to Vercel
+- **Sanity** — CORS origins, API token, webhook → `/api/revalidate` (see `studio-simonask.io/README.md`)
 
-1. Push this repo to GitHub.
-2. Import `nextjs-simonask.io` on Vercel (set **Root Directory** to `nextjs-simonask.io`).
-3. Add custom domains in Vercel; point Cloudflare DNS to Vercel.
-4. SSL is automatic on Vercel.
-5. Studio: use `npm run dev` locally, `npm run deploy` for Sanity-hosted studio, or deploy `studio-simonask.io` as a second Vercel project.
-
-Details: see README files in each subfolder.
+Studio: run locally, or `npm run deploy` in `studio-simonask.io` for `*.sanity.studio`.
 
 ## Scripts
 
@@ -65,3 +83,5 @@ Details: see README files in each subfolder.
 | `nextjs-simonask.io` | `npm run build` | Production build |
 | `studio-simonask.io` | `npm run dev` | Studio dev server |
 | `studio-simonask.io` | `npm run deploy` | Deploy studio to `*.sanity.studio` |
+
+Details: README in each subfolder.
