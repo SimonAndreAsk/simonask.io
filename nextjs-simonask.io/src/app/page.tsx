@@ -1,7 +1,16 @@
-import { OpenForWorkBadge } from "@/components/open-for-work-badge";
-import { ArticlesComingSoon } from "@/components/articles-coming-soon";
+import { type SanityDocument } from "next-sanity";
 
-export default function HomePage() {
+import { OpenForWorkBadge } from "@/components/open-for-work-badge";
+import { PostList } from "@/components/post-list";
+import { isStagingSite } from "@/sanity/env";
+import { sanityFetch } from "@/sanity/load";
+import { POSTS_QUERY } from "@/sanity/queries";
+
+const options = { next: { revalidate: 30 } };
+
+export default async function HomePage() {
+  const posts = await sanityFetch<SanityDocument[]>(POSTS_QUERY, {}, options);
+
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-16 sm:px-8 sm:py-20">
       <section className="mb-16 sm:mb-20">
@@ -10,8 +19,9 @@ export default function HomePage() {
           Hi, I&apos;m Simon.
         </h1>
         <p className="mt-4 max-w-lg text-lg leading-relaxed text-muted">
-        This is my digital home. Here, I write about what I'm learning while 
-        exploring digital analytics, AI, and related topics in my free time.
+          This is my digital home. Here, I write about what I&apos;m learning
+          while exploring digital analytics, AI, and related topics in my free
+          time.
         </p>
       </section>
 
@@ -19,7 +29,13 @@ export default function HomePage() {
         <h2 className="mb-6 font-display text-2xl tracking-tight text-foreground">
           Articles
         </h2>
-        <ArticlesComingSoon />
+        {isStagingSite || posts.length > 0 ? (
+          <PostList posts={posts} />
+        ) : (
+          <p className="text-muted leading-relaxed">
+            Articles are on the way — check back soon.
+          </p>
+        )}
       </section>
     </main>
   );

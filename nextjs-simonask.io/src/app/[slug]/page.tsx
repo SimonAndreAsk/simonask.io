@@ -7,9 +7,9 @@ import type { Metadata } from "next";
 import { ArticleBody } from "@/components/article-body";
 import { formatDate } from "@/lib/format";
 import { client } from "@/sanity/client";
-
-const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
-const SLUGS_QUERY = `*[_type == "post" && defined(slug.current)].slug.current`;
+import { isStagingSite } from "@/sanity/env";
+import { sanityFetch } from "@/sanity/load";
+import { POST_QUERY, SLUGS_QUERY } from "@/sanity/queries";
 
 const options = { next: { revalidate: 30 } };
 
@@ -30,7 +30,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await client.fetch<SanityDocument | null>(
+  const post = await sanityFetch<SanityDocument | null>(
     POST_QUERY,
     { slug },
     options,
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
-  const post = await client.fetch<SanityDocument | null>(
+  const post = await sanityFetch<SanityDocument | null>(
     POST_QUERY,
     { slug },
     options,
@@ -54,6 +54,7 @@ export default async function PostPage({ params }: PageProps) {
 
   if (!post) notFound();
 
+  const isDraft = post._id.startsWith("drafts.");
   const postImageUrl = post.image
     ? urlFor(post.image)?.width(1200).height(630).fit("crop").url()
     : null;
@@ -66,6 +67,16 @@ export default async function PostPage({ params }: PageProps) {
       >
         ← All articles
       </Link>
+
+      {isDraft && isStagingSite && (
+        <p
+          role="status"
+          className="mb-6 rounded-lg border border-open-green/40 bg-open-green/10 px-4 py-2 text-sm text-foreground"
+        >
+          Draft preview — not visible on simonask.io until you publish in
+          Sanity Studio.
+        </p>
+      )}
 
       <article>
         <header className="mb-10">
