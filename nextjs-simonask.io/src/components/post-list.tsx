@@ -11,7 +11,7 @@ export function PostList({ posts }: { posts: SanityDocument[] }) {
   if (posts.length === 0) {
     return (
       <p className="text-muted leading-relaxed">
-        No articles yet — check back soon.
+        No articles published yet.
       </p>
     );
   }

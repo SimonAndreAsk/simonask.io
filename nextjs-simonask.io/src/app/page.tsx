@@ -2,7 +2,6 @@ import { type SanityDocument } from "next-sanity";
 
 import { OpenForWorkBadge } from "@/components/open-for-work-badge";
 import { PostList } from "@/components/post-list";
-import { isStagingSite } from "@/sanity/env";
 import { sanityFetch } from "@/sanity/load";
 import { POSTS_QUERY } from "@/sanity/queries";
 
@@ -29,13 +28,7 @@ export default async function HomePage() {
         <h2 className="mb-6 font-display text-2xl tracking-tight text-foreground">
           Articles
         </h2>
-        {isStagingSite || posts.length > 0 ? (
-          <PostList posts={posts} />
-        ) : (
-          <p className="text-muted leading-relaxed">
-            Articles are on the way — check back soon.
-          </p>
-        )}
+        <PostList posts={posts} />
       </section>
     </main>
   );
