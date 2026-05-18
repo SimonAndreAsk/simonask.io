@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -55,6 +56,7 @@ export default function RootLayout({
           <SiteFooter />
           <StickyContact />
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
