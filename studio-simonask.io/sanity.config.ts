@@ -5,12 +5,16 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 
 import {studioDataset, studioProjectId} from './env'
+import {defaultPreviewOrigin} from './studioEnv'
 import {resolve} from './presentation/resolve'
 import {schemaTypes} from './schemaTypes'
 import {structure} from './structure'
 
 const previewOrigin =
-  process.env.SANITY_STUDIO_PREVIEW_ORIGIN ?? 'http://localhost:3000'
+  process.env.SANITY_STUDIO_PREVIEW_ORIGIN ??
+  (process.env.NODE_ENV === 'production'
+    ? defaultPreviewOrigin
+    : 'http://localhost:3000')
 
 export default defineConfig({
   name: 'default',

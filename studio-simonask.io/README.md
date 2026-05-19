@@ -12,9 +12,9 @@ cp .env.example .env.local
 npm run dev
 ```
 
-For **local dev**, copy `.env.example` → `.env.local` and set your project ID.
+For **local dev**, copy `.env.example` → `.env.local` (optional — defaults live in `studioEnv.ts`).
 
-**Hosted deploy** (`npm run deploy`) uses [`.env.production`](.env.production) (committed public project ID). Override locally with `.env.local` if needed.
+**Hosted deploy** (`npm run deploy`) bakes env at build time; `studioEnv.ts` supplies public project ID/dataset if no `.env` file is present.
 
 Open [http://localhost:3333](http://localhost:3333).
 
