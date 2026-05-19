@@ -17,6 +17,7 @@
   "dependencies": {
     "@sanity/code-input": "^7.1.1",
     "@sanity/vision": "^5.26.0",
+    "@selvklart/sanity-block-selector": "^4.0.4",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "sanity": "^5.25.1",

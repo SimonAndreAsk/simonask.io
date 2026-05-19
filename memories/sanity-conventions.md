@@ -16,7 +16,7 @@ Read when: schema, Studio config, GROQ, Presentation preview, or publish/revalid
 
 Fields: `title`, `slug`, `body` (`blockContent`), `image` (cover — list/social only), `publishedAt`. Studio groups: **Article** / **Publishing**.
 
-**Article body** — press **Enter** for a new line, then click **+** on the left of that line (Sanity has no `/callout` slash command): text (normal, H2, H3, quote), **Image** (`figure`), **Callout**, **Code** (`codeBlock`). Schema: `schemaTypes/blockContentType.ts`, `schemaTypes/blocks/`. Site render: `nextjs-simonask.io/src/components/article-body.tsx`.
+**Article body** — structured blocks (not shortcodes): use **⋯** insert menu or `@selvklart/sanity-block-selector` picker on the field. Types: text (normal, H2, H3, quote), **Image** (`figure`), **Callout**, **Code** (`codeBlock`). Do not type `/callout` in prose. Schema: `blockContentType.ts`, `blockContentInput.ts`, `blocks/`. Site: `article-body.tsx`.
 
 ## Hosted Studio deploy
 

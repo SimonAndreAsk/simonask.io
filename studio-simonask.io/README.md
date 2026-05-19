@@ -54,7 +54,7 @@ npm run deploy
 |------|--------|
 | 1 | **Content → Drafts → Create** (or open a draft) |
 | 2 | **Article** group: title, slug, then write in **Article** body |
-| 3 | In **Article**: press **Enter** for a new empty line → click **+** on the **left** of that line → pick **Image**, **Callout**, or **Code** (do not type `/callout` in the text) |
+| 3 | In **Article**: click **⋯** on a text line (or use the block picker) → choose **Image**, **Callout**, or **Code** — not `/callout` in the text (Sanity has no shortcodes) |
 | 4 | **Presentation** tab — preview on the site while editing (draft mode on the Next app) |
 | 5 | **Publishing** group: **Cover image** (card/social only), **Published at** |
 | 6 | Check **stage.simonask.io** for draft visibility (staging deployment only) |

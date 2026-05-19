@@ -1,19 +1,13 @@
 import {defineArrayMember, defineType} from 'sanity'
 
+import {blockContentInput} from './blockContentInput'
+
 export const blockContentType = defineType({
   name: 'blockContent',
   title: 'Block content',
   type: 'array',
-  options: {
-    insertMenu: {
-      filter: true,
-      showIcons: true,
-      groups: [
-        {name: 'text', title: 'Text', of: ['block']},
-        {name: 'media', title: 'Media', of: ['figure']},
-        {name: 'extras', title: 'Extras', of: ['callout', 'codeBlock']},
-      ],
-    },
+  components: {
+    input: blockContentInput,
   },
   of: [
     defineArrayMember({
