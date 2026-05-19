@@ -1,0 +1,11 @@
+﻿node_modules/
+.next/
+out/
+dist/
+.sanity/
+.vercel/
+package-lock.json
+**/package-lock.json
+*.log
+coverage/
+*.tsbuildinfo

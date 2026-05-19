@@ -1,0 +1,16 @@
+---
+description: Monorepo map and defaults for simonask.io
+alwaysApply: true
+---
+
+# Workspace
+
+Two apps: `nextjs-simonask.io` (public site) and `studio-simonask.io` (Sanity Studio).
+
+- Code ships via Git: `staging` → stage.simonask.io, `main` → simonask.io
+- Content ships via Sanity publish → webhook revalidates Next.js
+- Never commit secrets; use `.env.example` as reference
+
+Before large or cross-app changes, check `memories/INDEX.md` and read at most one relevant file under `memories/`.
+
+Operational runbooks: root `README.md`. Router: root `AGENTS.md`.

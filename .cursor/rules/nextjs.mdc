@@ -1,0 +1,38 @@
+---
+description: Next.js app conventions for simonask.io
+globs: nextjs-simonask.io/**/*
+alwaysApply: false
+---
+
+# Next.js app (`nextjs-simonask.io`)
+
+## Stack
+
+Next.js 16, React 19, Tailwind CSS 4 (`@import "tailwindcss"` in `globals.css`). Path alias `@/` → `src/`.
+
+## Next.js 16 (not the version in training data)
+
+APIs, conventions, and file structure may differ from your training data. Before writing Next code, read the relevant guide in `node_modules/next/dist/docs/` and heed deprecation notices.
+
+## Data
+
+- Fetch via `sanityFetch()` in `src/sanity/load.ts` — do not call the Sanity client directly from pages
+- GROQ queries live in `src/sanity/queries.ts`
+- Preview/drafts: `getSanityClient()` uses preview when draft mode is on OR `NEXT_PUBLIC_SITE_ENV=staging` with `SANITY_API_READ_TOKEN`
+
+## Layout shell
+
+`layout.tsx` wraps pages with: `StagingBanner`, `SiteHeader`, `SiteFooter`, `StickyContact`, `ThemeProvider` + `ThemeScript`.
+
+## Styling
+
+- Semantic tokens in `globals.css` (`:root` / `html.dark`) — use Tailwind theme names: `background`, `foreground`, `muted`, `accent`, `border`, `surface`, `open-green`
+- Article portable text: `ArticleBody` + `.article-*` classes in `globals.css`
+- Prefer existing component patterns in `src/components/`
+
+## API routes
+
+- `api/draft-mode/enable|disable` — Studio Presentation preview
+- `api/revalidate` — Sanity publish webhook (signed with `SANITY_REVALIDATE_SECRET`)
+
+More detail: `memories/nextjs-conventions.md`
