@@ -18,7 +18,7 @@ Fields: `title`, `slug`, optional `categories` (references to `postCategory`), o
 
 ## Post category document (`postCategory`)
 
-Fields: `label`, `backgroundColor` (color picker). Reusable across posts. Studio sidebar: **Post categories**. Homepage: colored pills at top of writing cards (same UI as project tags).
+Fields: `label` only. Reusable across posts. Studio sidebar: **Post categories**. Homepage: neutral pills at top of writing cards (same UI as project tags).
 
 **Article body** — structured blocks (not shortcodes): use **⋯** insert menu or `@selvklart/sanity-block-selector` picker on the field. Types: text (normal, H2, H3, quote), **Image** (`figure`), **Callout**, **Code** (`codeBlock`). Do not type `/callout` in prose. Schema: `blockContentType.ts`, `blockContentInput.ts`, `blocks/`. Site: `article-body.tsx`.
 
@@ -28,7 +28,7 @@ Fields: `title`, `url` (external link), optional `tags` (references to `projectT
 
 ## Project tag document (`projectTag`)
 
-Fields: `label` (tool name), `backgroundColor` (Sanity color picker). Reusable across projects. Studio sidebar: **Project tags**. Homepage: pills above project title (`project-tags.tsx`).
+Fields: `label` (tool name) only. Reusable across projects. Studio sidebar: **Project tags**. Homepage: neutral pills above project title (`project-tags.tsx`).
 
 ## Experience document (`experience`)
 

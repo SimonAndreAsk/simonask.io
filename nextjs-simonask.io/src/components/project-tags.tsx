@@ -1,7 +1,7 @@
-import {
-  contrastingTagTextColor,
-  type ProjectTag,
-} from "@/lib/project-tags";
+import { type ProjectTag } from "@/lib/project-tags";
+
+const tagClassName =
+  "inline-block rounded-full border border-border/70 bg-surface px-2.5 py-0.5 text-xs font-medium leading-snug text-muted";
 
 type ProjectTagsProps = {
   tags: ProjectTag[];
@@ -16,15 +16,7 @@ export function ProjectTags({ tags, listLabel = "Tools used" }: ProjectTagsProps
     <ul className="flex flex-wrap gap-1.5" aria-label={listLabel}>
       {tags.map((tag) => (
         <li key={tag._id}>
-          <span
-            className="inline-block rounded-full px-2.5 py-0.5 text-xs font-medium leading-snug"
-            style={{
-              backgroundColor: tag.backgroundColor,
-              color: contrastingTagTextColor(tag.backgroundColor),
-            }}
-          >
-            {tag.label}
-          </span>
+          <span className={tagClassName}>{tag.label}</span>
         </li>
       ))}
     </ul>

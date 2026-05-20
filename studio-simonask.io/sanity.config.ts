@@ -1,4 +1,3 @@
-import {colorInput} from '@sanity/color-input'
 import {codeInput} from '@sanity/code-input'
 import {defineConfig} from 'sanity'
 import {presentationTool} from 'sanity/presentation'
@@ -25,7 +24,6 @@ export default defineConfig({
   dataset: studioDataset,
 
   plugins: [
-    colorInput(),
     codeInput(),
     structureTool({structure}),
     presentationTool({

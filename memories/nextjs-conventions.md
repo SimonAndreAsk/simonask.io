@@ -47,7 +47,7 @@ import { POSTS_QUERY, PROJECTS_QUERY } from "@/sanity/queries";
 | `staging-banner` | Shown on staging env |
 | `post-list` | Home writing listing — card layout aligned with `project-list` |
 | `project-list` | Home projects — tags, thumbnail, summary, contextual link label |
-| `project-tags` | Colored tool pills from Sanity `projectTag` |
+| `project-tags` | Neutral tool/category pills from Sanity `projectTag` / `postCategory` |
 | `contact-aside`, `contact-quick-links` | Footer contact column — portrait, open-for-work, email / phone / LinkedIn |
 | `contact-form` | Name / email / message form in footer → `POST /api/contact` (Resend) |
 | `experience-section`, `education-section` | Home CV blocks (`/#experience`, `/#education`); experience from Sanity |

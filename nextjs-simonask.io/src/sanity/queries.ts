@@ -10,8 +10,7 @@ export const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | order(
   "excerptText": coalesce(excerpt, pt::text(body)),
   "categories": categories[]-> {
     _id,
-    label,
-    backgroundColor
+    label
   }
 }`
 
@@ -27,8 +26,7 @@ export const PROJECTS_QUERY = `*[_type == "project" && defined(url)] | order(pub
   image,
   "tags": tags[]-> {
     _id,
-    label,
-    backgroundColor
+    label
   }
 }`
 
