@@ -1,7 +1,7 @@
 import { type ProjectTag } from "@/lib/project-tags";
 
 const tagClassName =
-  "inline-block rounded-full border border-border/70 bg-surface px-2.5 py-0.5 text-xs font-medium leading-snug text-muted";
+  "inline-block rounded-md border border-border/70 bg-surface px-2.5 py-0.5 text-xs font-medium leading-snug text-muted";
 
 type ProjectTagsProps = {
   tags: ProjectTag[];
