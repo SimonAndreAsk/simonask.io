@@ -53,7 +53,7 @@ import { POSTS_QUERY, PROJECTS_QUERY } from "@/sanity/queries";
 | `experience-section`, `education-section` | Home CV blocks (`/#experience`, `/#education`) |
 | `profile-timeline` | Shared list for profile entries |
 | `article-body` | Portable text rendering |
-| `open-for-work-badge` | Hiring status |
+| `hero-intro-meta`, `location-label`, `open-for-work-label` | Hero location + hiring status |
 
 ## Do / Don't
 

@@ -1,3 +1,6 @@
+export const jobTitle = "Digital Analytics Specialist";
+export const locationLabel = "Gothenburg, Sweden";
+
 export type ProfileEntry = {
   title: string;
   subtitle?: string;

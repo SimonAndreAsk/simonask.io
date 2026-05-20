@@ -1,9 +1,14 @@
+"use client";
+
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 import { EmailIconLink } from "@/components/email-icon-link";
 import { GithubIconLink } from "@/components/github-icon-link";
 import { SectionLink } from "@/components/section-link";
+import { SiteIcon } from "@/components/site-icon";
 import { SITE_SECTIONS, sectionHref } from "@/lib/sections";
 
 const navLinkClass = "transition-colors hover:text-foreground";
@@ -16,12 +21,19 @@ const navItems = [
 ] as const;
 
 export function SiteHeader() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
   return (
     <header className="sticky top-0 z-40 border-b border-border/40 bg-background/90 backdrop-blur-sm">
-      <div className="mx-auto flex w-full max-w-2xl items-center justify-between px-6 py-5 sm:px-8">
+      <div className="mx-auto flex max-w-2xl items-center justify-between gap-4 px-6 py-4 sm:px-8 sm:py-5">
         <Link
           href="/"
-          className="inline-flex items-center gap-2.5 font-display text-lg tracking-tight text-foreground transition-opacity hover:opacity-70"
+          className="inline-flex min-w-0 items-center gap-2.5 font-display text-lg tracking-tight text-foreground transition-opacity hover:opacity-70"
+          onClick={closeMenu}
         >
           <Image
             src="/simon-portrait.png"
@@ -34,7 +46,8 @@ export function SiteHeader() {
           />
           Simon Ask
         </Link>
-        <div className="flex items-center gap-6 sm:gap-8">
+
+        <div className="hidden items-center gap-8 sm:flex">
           <nav className="flex flex-wrap items-center justify-end gap-x-5 gap-y-1 text-sm text-muted">
             {navItems.map(({ id, label }) => (
               <SectionLink key={id} href={sectionHref(id)} className={navLinkClass}>
@@ -42,12 +55,49 @@ export function SiteHeader() {
               </SectionLink>
             ))}
           </nav>
-          <div className="flex items-center gap-0.5 border-l border-border/40 pl-6 sm:pl-7">
+          <div className="flex items-center gap-0.5 border-l border-border/40 pl-7">
             <EmailIconLink />
             <GithubIconLink />
           </div>
         </div>
+
+        <button
+          type="button"
+          className="inline-flex shrink-0 rounded-md p-2 text-muted transition-colors hover:bg-surface hover:text-foreground sm:hidden"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-nav"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <SiteIcon icon={menuOpen ? X : Menu} />
+        </button>
       </div>
+
+      {menuOpen ? (
+        <nav
+          id="mobile-nav"
+          className="border-t border-border/40 px-6 pb-4 pt-3 sm:hidden"
+          aria-label="Mobile"
+        >
+          <ul className="flex flex-col gap-3 text-sm text-muted">
+            {navItems.map(({ id, label }) => (
+              <li key={id}>
+                <SectionLink
+                  href={sectionHref(id)}
+                  className={navLinkClass}
+                  onClick={closeMenu}
+                >
+                  {label}
+                </SectionLink>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4 flex items-center gap-0.5 border-t border-border/40 pt-4">
+            <EmailIconLink />
+            <GithubIconLink />
+          </div>
+        </nav>
+      ) : null}
     </header>
   );
 }

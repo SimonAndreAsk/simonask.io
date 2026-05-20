@@ -6,14 +6,13 @@ import { linkedinProfileUrl } from "@/lib/contact";
 import { SITE_SECTIONS, sectionHref } from "@/lib/sections";
 
 type HeroContactActionsProps = {
-  /** When false, no top margin (e.g. directly under a section heading). */
-  showTopMargin?: boolean;
+  className?: string;
 };
 
-export function HeroContactActions({ showTopMargin = true }: HeroContactActionsProps) {
+export function HeroContactActions({ className = "" }: HeroContactActionsProps) {
   return (
     <div
-      className={`${showTopMargin ? "mt-10" : "mt-8"} flex flex-wrap items-center gap-6 sm:gap-8`}
+      className={`flex flex-wrap items-center justify-center gap-6 sm:justify-start sm:gap-8 ${className}`.trim()}
     >
       <SectionLink
         href={sectionHref(SITE_SECTIONS.getInTouch)}

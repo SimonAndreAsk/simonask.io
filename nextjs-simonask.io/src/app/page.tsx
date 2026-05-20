@@ -3,7 +3,7 @@ import { type SanityDocument } from "next-sanity";
 import { EducationSection } from "@/components/education-section";
 import { ExperienceSection } from "@/components/experience-section";
 import { HeroContactActions } from "@/components/hero-contact-actions";
-import { OpenForWorkBadge } from "@/components/open-for-work-badge";
+import { HeroIntroMeta, HeroMobileLocationRow } from "@/components/hero-intro-meta";
 import { PostList } from "@/components/post-list";
 import { ProjectList } from "@/components/project-list";
 import { SectionLink } from "@/components/section-link";
@@ -24,37 +24,46 @@ export default async function HomePage() {
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-14 sm:px-8 sm:py-20">
       <section className="mb-20 sm:mb-24">
-        <OpenForWorkBadge />
-        <h1
-          id="intro"
-          className="page-section-title mt-10 font-display text-4xl leading-[1.12] tracking-tight text-foreground sm:text-5xl"
-        >
-          Hi, I&apos;m Simon.
-        </h1>
-        <p className="mt-3 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
-          Digital analytics specialist — explore{" "}
-          <SectionLink href={sectionHref(SITE_SECTIONS.writing)} className={introLinkClass}>
-            writing
-          </SectionLink>
-          {", "}
-          <SectionLink href={sectionHref(SITE_SECTIONS.projects)} className={introLinkClass}>
-            projects
-          </SectionLink>
-          {", "}
-          <SectionLink href={sectionHref(SITE_SECTIONS.experience)} className={introLinkClass}>
-            experience
-          </SectionLink>
-          {", "}
-          <SectionLink href={sectionHref(SITE_SECTIONS.education)} className={introLinkClass}>
-            education
-          </SectionLink>
-          {", or "}
-          <SectionLink href={sectionHref(SITE_SECTIONS.getInTouch)} className={introLinkClass}>
-            get in touch
-          </SectionLink>
-          .
-        </p>
-        <HeroContactActions />
+        <div className="flex flex-col">
+          <div className="space-y-3">
+            <h1
+              id="intro"
+              className="page-section-title text-center font-display text-4xl leading-[1.12] tracking-tight text-foreground sm:text-left sm:text-5xl"
+            >
+              Hi, I&apos;m Simon.
+            </h1>
+            <HeroIntroMeta />
+          </div>
+
+          <div className="mt-6 space-y-3">
+            <p className="mx-auto max-w-lg text-center text-base leading-relaxed text-muted sm:mx-0 sm:text-left sm:text-lg">
+              Welcome to my digital home. Feel free to explore my{" "}
+              <SectionLink href={sectionHref(SITE_SECTIONS.projects)} className={introLinkClass}>
+                projects
+              </SectionLink>
+              {", "}
+              <SectionLink href={sectionHref(SITE_SECTIONS.experience)} className={introLinkClass}>
+                experience
+              </SectionLink>
+              {", "}
+              <SectionLink href={sectionHref(SITE_SECTIONS.education)} className={introLinkClass}>
+                education
+              </SectionLink>
+              {", "}
+              <SectionLink href={sectionHref(SITE_SECTIONS.writing)} className={introLinkClass}>
+                writing
+              </SectionLink>
+              {" or "}
+              <SectionLink href={sectionHref(SITE_SECTIONS.getInTouch)} className={introLinkClass}>
+                get in touch with me
+              </SectionLink>
+              .
+            </p>
+            <HeroMobileLocationRow />
+          </div>
+
+          <HeroContactActions className="mt-8 sm:mt-10" />
+        </div>
       </section>
 
       <ExperienceSection />
