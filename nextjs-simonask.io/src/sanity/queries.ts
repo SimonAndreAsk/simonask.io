@@ -5,4 +5,11 @@ export const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | order(
 export const SLUGS_QUERY = `*[_type == "post" && defined(slug.current)].slug.current`
 
 /** Homepage project cards — ordered by publish date. */
-export const PROJECTS_QUERY = `*[_type == "project" && defined(url)] | order(publishedAt desc)`
+export const PROJECTS_QUERY = `*[_type == "project" && defined(url)] | order(publishedAt desc) {
+  _id,
+  title,
+  url,
+  summary,
+  publishedAt,
+  image
+}`

@@ -4,10 +4,7 @@ export const projectType = defineType({
   name: 'project',
   title: 'Project',
   type: 'document',
-  groups: [
-    {name: 'details', title: 'Details', default: true},
-    {name: 'media', title: 'Media'},
-  ],
+  groups: [{name: 'details', title: 'Details', default: true}],
   fields: [
     defineField({
       name: 'title',
@@ -35,8 +32,18 @@ export const projectType = defineType({
       name: 'image',
       title: 'Thumbnail',
       type: 'image',
-      group: 'media',
-      description: 'Optional — shown next to the title on the homepage.',
+      group: 'details',
+      options: {hotspot: true},
+      fields: [
+        defineField({
+          name: 'alt',
+          type: 'string',
+          title: 'Alt text',
+          description: 'Short description of the image for accessibility.',
+        }),
+      ],
+      description:
+        'Square image on the homepage (recommended 512×512 px, 1:1). Screenshot or brand mark works well — use hotspot to set crop focus.',
     }),
     defineField({
       name: 'publishedAt',

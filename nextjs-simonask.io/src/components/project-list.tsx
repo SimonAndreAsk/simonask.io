@@ -1,24 +1,65 @@
 import { ArrowRight } from "lucide-react";
 import { type SanityDocument } from "next-sanity";
 
-import { ProjectComingSoonCard } from "@/components/project-coming-soon-card";
 import { SiteIcon } from "@/components/site-icon";
+import { projectLinkLabel } from "@/lib/project-link";
 import { urlFor } from "@/sanity/image";
 
 function isDraftProject(project: SanityDocument) {
   return project._id.startsWith("drafts.");
 }
 
+const THUMB_SIZE = 80;
+
+function projectThumbnail(project: SanityDocument): {
+  src: string | null;
+  alt: string;
+} {
+  const title =
+    typeof project.title === "string" ? project.title : "Project";
+  const alt =
+    typeof project.image === "object" &&
+    project.image !== null &&
+    "alt" in project.image &&
+    typeof project.image.alt === "string" &&
+    project.image.alt.trim()
+      ? project.image.alt
+      : `${title} thumbnail`;
+
+  if (!project.image || !urlFor(project.image)) {
+    return { src: null, alt };
+  }
+
+  const src =
+    urlFor(project.image)
+      ?.width(THUMB_SIZE * 2)
+      .height(THUMB_SIZE * 2)
+      .fit("crop")
+      .auto("format")
+      .quality(85)
+      .url() ?? null;
+
+  return { src, alt };
+}
+
 export function ProjectList({ projects }: { projects: SanityDocument[] }) {
+  if (projects.length === 0) {
+    return (
+      <p className="leading-relaxed text-muted">
+        I haven&apos;t listed a project here yet. Check back soon.
+      </p>
+    );
+  }
+
   return (
     <ul className="border-t border-border/40">
       {projects.map((project) => {
         const draft = isDraftProject(project);
         const href = typeof project.url === "string" ? project.url : "";
-        const thumbUrl =
-          project.image && urlFor(project.image)
-            ? urlFor(project.image)?.width(160).height(160).fit("crop").url()
-            : null;
+        const { src: thumbUrl, alt: thumbAlt } = projectThumbnail(project);
+        const linkLabel = href ? projectLinkLabel(href) : "View project";
+        const title =
+          typeof project.title === "string" ? project.title : "Project";
 
         return (
           <li key={project._id} className="border-b border-border/40">
@@ -26,22 +67,27 @@ export function ProjectList({ projects }: { projects: SanityDocument[] }) {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex gap-4 py-5 transition-colors hover:text-open-green"
+              className="group grid grid-cols-[5rem_1fr] items-center gap-x-4 py-5 transition-colors hover:text-open-green"
             >
-              {thumbUrl ? (
-                <img
-                  src={thumbUrl}
-                  alt={
-                    typeof project.title === "string"
-                      ? `${project.title} thumbnail`
-                      : "Project thumbnail"
-                  }
-                  width={64}
-                  height={64}
-                  className="mt-0.5 size-16 shrink-0 rounded-md object-cover"
-                />
-              ) : null}
-              <div className="min-w-0 flex-1">
+              <div className="size-20 shrink-0 overflow-hidden rounded-xl bg-surface ring-1 ring-border/50">
+                {thumbUrl ? (
+                  <img
+                    src={thumbUrl}
+                    alt={thumbAlt}
+                    width={THUMB_SIZE}
+                    height={THUMB_SIZE}
+                    className="size-20 object-cover object-center"
+                  />
+                ) : (
+                  <div
+                    className="flex size-20 items-center justify-center bg-surface/80 font-display text-xl text-muted"
+                    aria-hidden
+                  >
+                    {title.charAt(0).toUpperCase()}
+                  </div>
+                )}
+              </div>
+              <div className="min-w-0">
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <h3 className="font-display text-lg leading-snug tracking-tight text-foreground transition-colors group-hover:text-open-green sm:text-xl">
                     {project.title}
@@ -57,16 +103,20 @@ export function ProjectList({ projects }: { projects: SanityDocument[] }) {
                     {project.summary}
                   </p>
                 ) : null}
+                {href ? (
+                  <p className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-muted transition-colors group-hover:text-open-green">
+                    <span>{linkLabel}</span>
+                    <SiteIcon
+                      icon={ArrowRight}
+                      className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5"
+                    />
+                  </p>
+                ) : null}
               </div>
-              <SiteIcon
-                icon={ArrowRight}
-                className="mt-1 shrink-0 text-muted opacity-0 transition-[opacity,transform,color] group-hover:translate-x-0.5 group-hover:text-open-green group-hover:opacity-100"
-              />
             </a>
           </li>
         );
       })}
-      <ProjectComingSoonCard />
     </ul>
   );
 }

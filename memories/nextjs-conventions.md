@@ -11,7 +11,7 @@ Read when: editing the public site — pages, components, styles, or Sanity cons
 | Global styles | `src/app/globals.css` |
 | Components | `src/components/` |
 | Sanity client/fetch | `src/sanity/client.ts`, `load.ts`, `queries.ts`, `env.ts` |
-| Utils | `src/lib/format.ts`, `src/lib/contact.ts`, `src/lib/profile.ts` (education/experience copy) |
+| Utils | `src/lib/format.ts`, `src/lib/contact.ts`, `src/lib/profile.ts`, `src/lib/project-link.ts` |
 | APIs | `src/app/api/revalidate/`, `src/app/api/draft-mode/`, `src/app/api/contact/` |
 
 ## Fetching content
@@ -46,10 +46,9 @@ import { POSTS_QUERY, PROJECTS_QUERY } from "@/sanity/queries";
 | `hero-contact-actions` | Home hero: Get in Touch + LinkedIn |
 | `staging-banner` | Shown on staging env |
 | `post-list` | Home writing listing |
-| `project-list` | Home projects listing (Sanity `project`) |
+| `project-list` | Home projects — rounded thumbnail, summary, contextual link label (`project-link.ts`) |
 | `contact-aside`, `contact-quick-links` | Footer contact column — portrait, open-for-work, email / phone / LinkedIn |
 | `contact-form` | Name / email / message form in footer → `POST /api/contact` (Resend) |
-| `project-coming-soon-card` | Placeholder row in project list |
 | `experience-section`, `education-section` | Home CV blocks (`/#experience`, `/#education`) |
 | `profile-timeline` | Shared list for profile entries |
 | `article-body` | Portable text rendering |

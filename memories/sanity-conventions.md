@@ -20,7 +20,7 @@ Fields: `title`, `slug`, `body` (`blockContent`), `image` (cover — list/social
 
 ## Project document (`project`)
 
-Fields: `title`, `url` (external link), optional `summary`, optional `image` (homepage thumbnail), `publishedAt` (ordering). Studio: **Details** / **Media** groups. Listed on site home (`/#projects`); Presentation resolves to `/#projects`.
+Fields: `title`, `url` (external link), optional `summary`, optional `image` (homepage thumbnail, 1:1, hotspot), `publishedAt` (ordering). Studio: **Details** group. Listed on site home (`/#projects`); Presentation resolves to `/#projects`.
 
 ## Hosted Studio deploy
 
