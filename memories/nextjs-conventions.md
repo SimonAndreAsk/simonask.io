@@ -48,7 +48,7 @@ import { POSTS_QUERY, PROJECTS_QUERY } from "@/sanity/queries";
 | `post-list` | Home writing listing — card layout aligned with `project-list` |
 | `project-list` | Home projects — technologies, thumbnail, summary, contextual link label |
 | `label-pills` | Neutral label pills from Sanity `projectTechnology` / `postCategory` (`content-labels.ts`) |
-| `contact-aside`, `contact-quick-links` | Footer contact column — portrait, open-for-work, email / phone / LinkedIn |
+| `contact-aside` | Footer contact — centered portrait above the form |
 | `contact-form` | Name / email / message form in footer → `POST /api/contact` (Resend) |
 | `experience-section`, `education-section` | Home CV blocks (`/#experience`, `/#education`); experience from Sanity |
 | `profile-timeline` | Experience and education cards — same inner layout as before (title + period row), no logos |

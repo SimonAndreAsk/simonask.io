@@ -105,7 +105,7 @@ export function ContactForm() {
           />
         </div>
 
-        <div className="flex justify-center pt-1 sm:justify-end">
+        <div className="flex justify-center pt-1">
           <button
             type="submit"
             disabled={status === "sending"}

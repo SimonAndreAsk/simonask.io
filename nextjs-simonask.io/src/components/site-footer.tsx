@@ -26,19 +26,20 @@ export function SiteFooter() {
     <footer className="mt-auto border-t border-border/40">
       <div className="mx-auto max-w-2xl px-6 sm:px-8">
         <section id="get-in-touch" className="py-14 sm:py-16">
-          <div className="flex flex-col items-center gap-8 text-center sm:flex-row sm:items-start sm:gap-8 sm:text-left">
+          <div className="flex flex-col items-center gap-8 text-center">
             <ContactAside />
-            <div className="min-w-0 w-full max-w-lg sm:max-w-none sm:flex-1">
-              <div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-4 sm:gap-y-3">
-                <h2 className="page-section-title font-display text-2xl tracking-tight text-foreground">
-                  Get in touch
-                </h2>
+            <div className="w-full max-w-lg">
+              <h2 className="page-section-title font-display text-2xl tracking-tight text-foreground">
+                Get in touch
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                If you want to talk analytics, tooling, or a role, send a note —{" "}
+                <br className="hidden sm:block" aria-hidden />
+                I read everything and reply when I can.
+              </p>
+              <div className="mt-3">
                 <OpenForWorkLabel />
               </div>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                If you want to talk analytics, tooling, or a role, send a note — I
-                read everything and reply when I can.
-              </p>
 
               <div className="mt-8 w-full text-left">
                 <ContactForm />
