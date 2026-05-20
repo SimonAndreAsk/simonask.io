@@ -9,7 +9,8 @@
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
     "dev": "sanity dev",
-    "start": "sanity start"
+    "start": "sanity start",
+    "migration:technologies": "sanity migration run rename-project-tags-field --no-dry-run --no-confirm && sanity migration run clear-project-technology-refs --no-dry-run --no-confirm && sanity migration run delete-project-tag-documents --no-dry-run --no-confirm && sanity migration run create-project-technology-documents --no-dry-run --no-confirm && sanity migration run restore-project-technology-refs --no-dry-run --no-confirm"
   },
   "keywords": [
     "sanity"

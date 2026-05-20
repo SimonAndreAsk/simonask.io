@@ -23,7 +23,12 @@ export async function POST(request: NextRequest) {
     if (slug) {
       revalidatePath(`/${slug}`);
     }
-  } else if (body?._type === "project" || body?._type === "experience") {
+  } else if (
+    body?._type === "project" ||
+    body?._type === "experience" ||
+    body?._type === "projectTechnology" ||
+    body?._type === "postCategory"
+  ) {
     revalidatePath("/");
   } else {
     revalidatePath("/", "layout");

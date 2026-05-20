@@ -24,7 +24,7 @@ export const PROJECTS_QUERY = `*[_type == "project" && defined(url)] | order(pub
   summary,
   publishedAt,
   image,
-  "tags": tags[]-> {
+  "technologies": technologies[]-> {
     _id,
     label
   }

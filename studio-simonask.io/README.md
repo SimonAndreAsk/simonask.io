@@ -29,6 +29,7 @@ Optional: `SANITY_STUDIO_PREVIEW_ORIGIN=http://localhost:3000` (or `https://stag
 | `npm run dev` | Local studio |
 | `npm run build` | Production build |
 | `npm run deploy` | Host studio on `*.sanity.studio` (run from **this folder**, not repo root) |
+| `npm run migration:technologies` | Migrate `projectTag` / `project.tags` → `projectTechnology` / `technologies` |
 | `npm run start` | Serve production build |
 
 ### Deploy hosted Studio
@@ -47,16 +48,20 @@ npm run deploy
 
 | Section | Purpose |
 |---------|---------|
-| **Drafts** | Unpublished posts |
-| **Published** | Live on simonask.io |
-| **All posts** | Full list |
+| **Writing → Drafts** | Unpublished posts |
+| **Writing → Published** | Live on simonask.io |
+| **Writing → All posts** | Full post list |
+| **Homepage → Projects** | Project cards on the site home |
+| **Homepage → Experience** | CV timeline on the site home |
+| **Taxonomies → Technologies** | Reusable tech labels for projects |
+| **Taxonomies → Post categories** | Reusable topic labels for posts |
 | **Presentation** | Live preview of the website in an iframe |
 
 ## Writing workflow
 
 | Step | Action |
 |------|--------|
-| 1 | **Content → Drafts → Create** (or open a draft) |
+| 1 | **Content → Writing → Drafts → Create** (or open a draft) |
 | 2 | **Article** group: title, slug, then write in **Article** body |
 | 3 | In **Article**: click **⋯** on a text line (or use the block picker) → choose **Image**, **Callout**, or **Code** — not `/callout` in the text (Sanity has no shortcodes) |
 | 4 | **Presentation** tab — preview on the site while editing (draft mode on the Next app) |
@@ -72,7 +77,36 @@ Unpublished drafts do **not** appear on production.
 
 **Post** — `schemaTypes/postType.ts`
 
-- `title`, `slug`, `body` (`blockContent`), `image` (cover), `publishedAt`
+- `title`, `slug`, optional `categories` → `postCategory`, optional `excerpt`, `body` (`blockContent`), `image` (cover), `publishedAt`
+
+**Project** — `schemaTypes/projectType.ts`
+
+- `title`, `url`, optional `technologies` → `projectTechnology`, optional `summary`, optional `image` (thumbnail), `publishedAt`
+
+**Technology** (`projectTechnology`) — `schemaTypes/projectTechnologyType.ts`
+
+- `label` only. Maintain under **Taxonomies → Technologies**, then pick on projects.
+
+**Post category** (`postCategory`) — `schemaTypes/postCategoryType.ts`
+
+- `label` only. Maintain under **Taxonomies → Post categories**, then pick on posts.
+
+**Experience** — `schemaTypes/experienceType.ts`
+
+- `title` (organization), `subtitle`, `period`, `href`, `logoAlt`, `logoImage`, `details`, `publishedAt` (sort date)
+
+**Article blocks** (embedded in post body) — `figure`, `callout`, `codeBlock` via `blockContentType.ts`
+
+## Dataset migration (schema renames)
+
+After pulling schema changes that rename types or fields, run on the target dataset **before** `npm run deploy`:
+
+```powershell
+cd studio-simonask.io
+npm run migration:technologies
+```
+
+Migrations (five steps, one command): `rename-project-tags-field` → `clear-project-technology-refs` → `delete-project-tag-documents` → `create-project-technology-documents` → `restore-project-technology-refs`. Converts `project.tags` → `technologies` and `projectTag` → `projectTechnology`. Test on a dev dataset first.
 
 ## CORS
 

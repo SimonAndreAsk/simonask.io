@@ -2,9 +2,9 @@ import { ArrowRight } from "lucide-react";
 import { type SanityDocument } from "next-sanity";
 
 import { GithubIcon, SiteIcon } from "@/components/site-icon";
-import { ProjectTags } from "@/components/project-tags";
+import { LabelPills } from "@/components/label-pills";
 import { isGithubProjectUrl, projectLinkLabel } from "@/lib/project-link";
-import { projectTagsFromSanity } from "@/lib/project-tags";
+import { technologiesFromSanity } from "@/lib/content-labels";
 
 function isDraftProject(project: SanityDocument) {
   return project._id.startsWith("drafts.");
@@ -76,7 +76,7 @@ export function ProjectList({ projects }: { projects: SanityDocument[] }) {
         const title =
           typeof project.title === "string" ? project.title : "Project";
         const summary = projectSummary(project);
-        const tags = projectTagsFromSanity(project.tags);
+        const technologies = technologiesFromSanity(project.technologies);
 
         return (
           <li key={project._id}>
@@ -88,7 +88,9 @@ export function ProjectList({ projects }: { projects: SanityDocument[] }) {
               className="group flex min-h-56 flex-col rounded-xl bg-surface/40 px-8 pb-6 pt-8 ring-1 ring-border/50 transition-colors hover:text-open-green"
             >
               <div className="flex min-h-0 flex-1 flex-col">
-                {tags.length > 0 ? <ProjectTags tags={tags} /> : null}
+                {technologies.length > 0 ? (
+                  <LabelPills labels={technologies} />
+                ) : null}
                 <div className="mt-auto flex flex-col gap-1.5 pt-14">
                 <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
                   <h3 className="font-display text-lg leading-snug tracking-tight text-foreground transition-colors group-hover:text-open-green sm:text-xl">

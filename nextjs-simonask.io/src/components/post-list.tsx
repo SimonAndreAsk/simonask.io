@@ -2,11 +2,11 @@ import Link from "next/link";
 import { ArrowRight, FileText } from "lucide-react";
 import { type SanityDocument } from "next-sanity";
 
-import { ProjectTags } from "@/components/project-tags";
+import { LabelPills } from "@/components/label-pills";
 import { SiteIcon } from "@/components/site-icon";
 import { formatDate } from "@/lib/format";
 import { readingMinutes, truncateExcerpt } from "@/lib/post-excerpt";
-import { postCategoriesFromSanity } from "@/lib/project-tags";
+import { postCategoriesFromSanity } from "@/lib/content-labels";
 
 function isDraftPost(post: SanityDocument) {
   return post._id.startsWith("drafts.");
@@ -105,7 +105,7 @@ export function PostList({ posts }: { posts: SanityDocument[] }) {
             >
               <div className="flex min-h-0 flex-1 flex-col">
                 {categories.length > 0 ? (
-                  <ProjectTags tags={categories} listLabel="Categories" />
+                  <LabelPills labels={categories} listLabel="Categories" />
                 ) : null}
                 <div className="mt-auto flex flex-col gap-1.5 pt-14">
                   <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">

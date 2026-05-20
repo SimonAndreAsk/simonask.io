@@ -5,13 +5,13 @@ import {figureType} from './blocks/figureType'
 import {experienceType} from './experienceType'
 import {postCategoryType} from './postCategoryType'
 import {postType} from './postType'
-import {projectTagType} from './projectTagType'
+import {projectTechnologyType} from './projectTechnologyType'
 import {projectType} from './projectType'
 
 export const schemaTypes = [
   postType,
   projectType,
-  projectTagType,
+  projectTechnologyType,
   postCategoryType,
   experienceType,
   blockContentType,

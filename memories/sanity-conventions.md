@@ -18,17 +18,19 @@ Fields: `title`, `slug`, optional `categories` (references to `postCategory`), o
 
 ## Post category document (`postCategory`)
 
-Fields: `label` only. Reusable across posts. Studio sidebar: **Post categories**. Homepage: neutral pills at top of writing cards (same UI as project tags).
+Fields: `label` only. Reusable across posts. Studio sidebar: **Taxonomies → Post categories**. Homepage: neutral pills at top of writing cards (`label-pills.tsx`, list label "Categories").
 
 **Article body** — structured blocks (not shortcodes): use **⋯** insert menu or `@selvklart/sanity-block-selector` picker on the field. Types: text (normal, H2, H3, quote), **Image** (`figure`), **Callout**, **Code** (`codeBlock`). Do not type `/callout` in prose. Schema: `blockContentType.ts`, `blockContentInput.ts`, `blocks/`. Site: `article-body.tsx`.
 
 ## Project document (`project`)
 
-Fields: `title`, `url` (external link), optional `tags` (references to `projectTag`), optional `summary`, optional `image` (homepage thumbnail, 1:1, hotspot), `publishedAt` (ordering). Studio: **Details** group. Listed on site home (`/#projects`); Presentation resolves to `/#projects`.
+Fields: `title`, `url` (external link), optional `technologies` (references to `projectTechnology`), optional `summary`, optional `image` (homepage thumbnail, 1:1, hotspot), `publishedAt` (ordering). Studio: **Details** group. Listed on site home (`/#projects`); Presentation resolves to `/#projects`.
 
-## Project tag document (`projectTag`)
+## Technology document (`projectTechnology`)
 
-Fields: `label` (tool name) only. Reusable across projects. Studio sidebar: **Project tags**. Homepage: neutral pills above project title (`project-tags.tsx`).
+Fields: `label` only. Reusable across projects. Studio sidebar: **Taxonomies → Technologies**. Homepage: neutral pills above project title (`label-pills.tsx`, default list label "Technologies").
+
+**Taxonomy workflow:** create entries under **Technologies** (or **Post categories**) first, then attach on **Projects** or **Posts**.
 
 ## Experience document (`experience`)
 
@@ -84,4 +86,4 @@ Next app (required for Studio iframe connection):
 | Keep slug required and sourced from title on `post` | Change `_type` name `post`, `project`, or `experience` without updating GROQ and webhook handler |
 | Run Studio from `studio-simonask.io` | Duplicate Sanity project config inside the Next app (use `env.ts` in each package) |
 
-Webhook handler special-cases `_type === "post"` (home + slug path), `_type === "project"` and `_type === "experience"` (home); other types revalidate layout root.
+Webhook handler special-cases `_type === "post"` (home + slug path); `_type === "project"`, `experience`, `projectTechnology`, or `postCategory` revalidate home; other types revalidate layout root.

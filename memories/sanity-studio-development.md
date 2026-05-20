@@ -54,7 +54,15 @@ Also touch Next.js when the type should appear on simonask.io:
 
 ## Desk & Presentation
 
-**Desk:** Drafts / Published / All posts filter `_type == "post"`. **Projects** list filters `_type == "project"`. **Project tags** / **Post categories** lists filter `_type == "projectTag"` / `_type == "postCategory"`. **Experience** list filters `_type == "experience"`. New types → `S.listItem()` + `S.documentList()` in `structure.ts`.
+**Desk** (`structure.ts`) — nested groups:
+
+- **Writing** — Drafts / Published / All posts (`_type == "post"`)
+- **Homepage** — Projects (`project`), Experience (`experience`)
+- **Taxonomies** — Technologies (`projectTechnology`), Post categories (`postCategory`)
+
+New types → add under the right group with `S.listItem()` + `S.documentList()`.
+
+**Content migration:** `migrations/<name>/index.ts`, run with `npx sanity migration run <name> --no-dry-run`. Technologies rename: `npm run migration:technologies` (five steps: field rename, clear refs, delete `projectTag`, create `projectTechnology`, restore refs). Run on dataset before deploying schema that depends on migrated fields.
 
 **Presentation:** `post` → `/${slug.current}` and `/`. `project` → `/#projects` and `/`. `experience` → `/#experience` and `/` in `presentation/resolve.ts`. New previewable types need a `locations.<type>` entry and a real Next route. Preview URLs: `sanity.config.ts`.
 
@@ -62,7 +70,7 @@ Also touch Next.js when the type should appear on simonask.io:
 
 ## Plugins
 
-Register in `sanity.config.ts` `plugins: [...]`. Installed today: `structureTool`, `presentationTool`, `visionTool`. Add new plugins there; avoid duplicate structure/presentation tools.
+Register in `sanity.config.ts` `plugins: [...]`. Installed today: `codeInput`, `structureTool`, `presentationTool`, `visionTool`. Add new plugins there; avoid duplicate structure/presentation tools.
 
 ---
 
