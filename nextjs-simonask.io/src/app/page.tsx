@@ -94,8 +94,7 @@ export default async function HomePage() {
           Writing
         </h2>
         <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted">
-          Longer notes and build logs — useful if you&apos;re deciding whether
-          we&apos;re a fit.
+          Longer notes and build logs.
         </p>
         <div className="mt-8">
           <PostList posts={posts} />
