@@ -19,6 +19,7 @@ Personal portfolio site (with writing) and Sanity CMS for [simonask.io](https://
 | Change post fields or Studio screens | `studio-simonask.io/schemaTypes/` |
 | Ship code to staging + production | Work on branch `staging`, then say **Go Live** in Cursor (or follow [memories/go-live.md](./memories/go-live.md)) |
 | Use Cursor effectively on this repo | [memories/cursor-usage.md](./memories/cursor-usage.md) |
+| Find a folder by plain English (“public site”, “CMS”) | [docs/repo-map.md](./docs/repo-map.md) |
 
 **First time setup:** install [Node.js](https://nodejs.org/) 20+, then run `npm install` inside **each** app folder you need (`nextjs-simonask.io` and/or `studio-simonask.io`). Copy `.env.example` → `.env.local` in that folder before `npm run dev`.
 
@@ -26,15 +27,18 @@ Personal portfolio site (with writing) and Sanity CMS for [simonask.io](https://
 
 This is a **monorepo** — two apps in one Git repo, plus docs and Cursor config.
 
-| Folder / file | For | Purpose |
-|---------------|-----|---------|
-| **`nextjs-simonask.io/`** | Everyone | Public Next.js site (what visitors see) |
-| **`studio-simonask.io/`** | You + editors | Sanity Studio — create and publish posts/projects |
-| **`memories/`** | Cursor + you | Short convention docs for agents; humans start at [memories/README.md](./memories/README.md) |
-| **`.cursor/`** | Cursor | Project rules and skills — see [.cursor/README.md](./.cursor/README.md) |
-| **`scripts/`** | Maintainers | Repo scripts (e.g. doc validation) — [scripts/README.md](./scripts/README.md) |
-| **`AGENTS.md`** | Cursor | One-screen map for AI agents |
-| **`.local/`** | You only (gitignored) | Optional private notes; never committed |
+| Plain name | Folder on disk | Who | Purpose |
+|------------|------------------|-----|---------|
+| **Public website** | `nextjs-simonask.io/` | Everyone | Next.js site visitors see (simonask.io) |
+| **CMS / Studio** | `studio-simonask.io/` | You + editors | Write and publish posts & projects |
+| **Convention notes** | `memories/` | Cursor + you | Short agent/human docs — [memories/README.md](./memories/README.md) |
+| **Cursor config** | `.cursor/` | Cursor | Rules and skills — [.cursor/README.md](./.cursor/README.md) |
+| **Repo map (aliases)** | `docs/` | You | [docs/repo-map.md](./docs/repo-map.md) — “I mean X → open path Y” |
+| **Scripts** | `scripts/` | Maintainers | [scripts/README.md](./scripts/README.md) |
+| **Agent router** | `AGENTS.md` | Cursor | One-screen map for AI |
+| **Private notes** | `.local/` | You only (gitignored) | Never committed |
+
+**More tasks and paths:** [docs/repo-map.md](./docs/repo-map.md) (homepage files, Sanity folders, ship workflows).
 
 There is **no** `package.json` at the repo root — always `cd` into the app folder before `npm install` or `npm run dev`.
 

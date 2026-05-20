@@ -17,6 +17,7 @@ Start a **new chat** for each discrete job:
 | UI like another section | `Match project-list card padding; keep profile-timeline title/period row` → `homepage-cards.md` |
 | Revert this chat only | `Revert all changes from this chat only; then Go Live` |
 | Contact broken on prod | `Fix live contact form — check Vercel RESEND_API_KEY and mail.simonask.io sender` → `contact-form.md` |
+| Big change — decide first | `Grill this idea: add newsletters as a new Sanity document type` → `grill-me` |
 
 **Stay in the same chat** only while iterating on the *same* file/PR.
 

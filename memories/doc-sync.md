@@ -23,7 +23,7 @@ Read when: you change project structure, or agent docs feel outdated.
 | Deploy / branch / env workflow | `architecture.md`, root `README.md`, app READMEs |
 | New memory or skill | New file in `memories/`, row in `memories/INDEX.md`, `memories/README.md`, root `AGENTS.md` if scope is repo-wide |
 | New rule in .cursor/rules/ | `memories/INDEX.md` or `memories/doc-sync.md`, `.cursor/README.md` if layout changes |
-| Repo folder map / beginner navigation | Root `README.md`, `memories/README.md`, `.cursor/README.md`, `scripts/README.md` |
+| Repo folder map / beginner navigation | Root `README.md`, `docs/repo-map.md`, `memories/README.md`, `.cursor/README.md`, `scripts/README.md` |
 
 ## What to update in each doc
 

@@ -2,6 +2,8 @@
 
 Project notes for **Cursor** and for you when conventions matter. Files are short on purpose — read **one** topic at a time, not the whole folder.
 
+**Folder names on disk:** see [../docs/repo-map.md](../docs/repo-map.md) for plain-language labels (`Public website` → `nextjs-simonask.io/`, etc.).
+
 ## Start here
 
 | File | When to open it |
@@ -29,6 +31,7 @@ Project notes for **Cursor** and for you when conventions matter. Files are shor
 | [doc-sync.md](./doc-sync.md) | Which docs to update after a structural code change |
 | [decisions.md](./decisions.md) | Why the repo is shaped this way (ADRs) |
 | [refine-prompt.md](./refine-prompt.md) | 5-part prompt framework |
+| [grill-me.md](./grill-me.md) | Devil's-advocate an idea before building |
 
 ## Setup commands and env tables
 
