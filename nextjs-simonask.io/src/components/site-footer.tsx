@@ -16,7 +16,6 @@ const sectionLinks: { id: SiteSectionId; label: string }[] = [
   { id: SITE_SECTIONS.education, label: "Education" },
   { id: SITE_SECTIONS.projects, label: "Projects" },
   { id: SITE_SECTIONS.writing, label: "Writing" },
-  { id: SITE_SECTIONS.getInTouch, label: "Get in touch" },
 ];
 
 export function SiteFooter() {
@@ -29,10 +28,7 @@ export function SiteFooter() {
           <div className="flex items-start gap-5 sm:gap-8">
             <ContactAside />
             <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-                <h2 className="page-section-title font-display text-2xl tracking-tight text-foreground">
-                  Get in touch
-                </h2>
+              <div className="flex flex-wrap items-center justify-end gap-y-3">
                 <p className="inline-flex shrink-0 items-center gap-1.5 text-xs text-muted">
                   <span
                     className="open-for-work-dot size-1.5 shrink-0 rounded-full bg-open-green"
@@ -41,6 +37,7 @@ export function SiteFooter() {
                   Open for work
                 </p>
               </div>
+              <h2 className="page-section-title sr-only">Get in touch</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted">
                 If you want to talk analytics, tooling, or a role, send a note — I
                 read everything and reply when I can.
@@ -63,7 +60,7 @@ export function SiteFooter() {
             </Link>
 
             <nav
-              className="grid grid-cols-2 gap-x-10 gap-y-2 sm:grid-cols-5 sm:gap-x-8"
+              className="grid grid-cols-2 gap-x-10 gap-y-2 sm:grid-cols-4 sm:gap-x-8"
               aria-label="Page sections"
             >
               {sectionLinks.map(({ id, label }) => (
