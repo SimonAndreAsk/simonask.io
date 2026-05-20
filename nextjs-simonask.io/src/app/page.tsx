@@ -35,7 +35,7 @@ export default async function HomePage() {
             <HeroIntroMeta />
           </div>
 
-          <div className="mt-6 space-y-3">
+          <div className="mt-3 space-y-3 sm:mt-6">
             <p className="mx-auto max-w-lg text-center text-base leading-relaxed text-muted sm:mx-0 sm:text-left sm:text-lg">
               Welcome to my digital home. Feel free to explore my{" "}
               <SectionLink href={sectionHref(SITE_SECTIONS.projects)} className={introLinkClass}>
@@ -62,7 +62,7 @@ export default async function HomePage() {
             <HeroMobileLocationRow />
           </div>
 
-          <HeroContactActions className="mt-8 sm:mt-10" />
+          <HeroContactActions className="mt-12 sm:mt-10" />
         </div>
       </section>
 
