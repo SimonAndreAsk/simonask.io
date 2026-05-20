@@ -16,9 +16,12 @@ export function HeroContactActions({ className = "" }: HeroContactActionsProps) 
     >
       <SectionLink
         href={sectionHref(SITE_SECTIONS.getInTouch)}
-        className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm text-foreground shadow-sm transition-[color,background-color,border-color,box-shadow] hover:border-open-green/40 hover:bg-surface/80 hover:text-open-green"
+        className="group inline-flex items-center gap-2 rounded-md border border-open-green bg-open-green px-4 py-2.5 text-sm text-white shadow-sm transition-[transform,box-shadow,filter] duration-200 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-lg hover:shadow-open-green/35 active:translate-y-0 active:scale-[0.98] active:brightness-95 active:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-open-green"
       >
-        <SiteIcon icon={Mail} />
+        <SiteIcon
+          icon={Mail}
+          className="shrink-0 transition-transform duration-200 ease-out group-hover:scale-110"
+        />
         Get in touch
       </SectionLink>
       <a
