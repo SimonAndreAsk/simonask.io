@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, FileText } from "lucide-react";
+import { ArrowRight, Compass, type LucideIcon } from "lucide-react";
 import { type SanityDocument } from "next-sanity";
 
 import { GithubIcon, SiteIcon } from "@/components/site-icon";
@@ -37,7 +37,7 @@ function postSummaryPreview(item: SanityDocument): string | null {
   return `${text.slice(0, 157).trimEnd()}…`;
 }
 
-const READ_ARTICLE_LABEL = "Read article";
+const EXPLORE_CASE_LABEL = "Explore case";
 
 function projectSummary(project: SanityDocument): string | null {
   if (typeof project.summary === "string" && project.summary.trim()) {
@@ -53,18 +53,19 @@ function projectAriaLabel(title: string, linkLabel: string, hasHref: boolean) {
 
 type ProjectDestinationProps = {
   linkLabel: string;
-  showGithubIcon: boolean;
+  showGithubIcon?: boolean;
+  leadingIcon?: LucideIcon;
   className?: string;
   arrowClassName?: string;
 };
 
 function ProjectDestination({
   linkLabel,
-  showGithubIcon,
-  showArticleIcon = false,
+  showGithubIcon = false,
+  leadingIcon,
   className = "",
   arrowClassName = "",
-}: ProjectDestinationProps & { showArticleIcon?: boolean }) {
+}: ProjectDestinationProps) {
   return (
     <span
       className={[
@@ -75,7 +76,9 @@ function ProjectDestination({
         .join(" ")}
     >
       {showGithubIcon ? <GithubIcon className="size-4 shrink-0" /> : null}
-      {showArticleIcon ? <SiteIcon icon={FileText} className="size-4 shrink-0" /> : null}
+      {leadingIcon ? (
+        <SiteIcon icon={leadingIcon} className="size-4 shrink-0" />
+      ) : null}
       <span>{linkLabel}</span>
       <SiteIcon
         icon={ArrowRight}
@@ -119,7 +122,7 @@ export function ProjectList({ projects }: { projects: SanityDocument[] }) {
           const showMeta = Boolean(project.publishedAt || readMinutes);
           const readHint = readMinutes ? `, ${readMinutes} min read` : "";
           const ariaLabel = hasSlug
-            ? `${title}${readHint} — ${READ_ARTICLE_LABEL}`
+            ? `${title}${readHint} — ${EXPLORE_CASE_LABEL}`
             : `${title}${readHint}`;
 
           return (
@@ -151,7 +154,7 @@ export function ProjectList({ projects }: { projects: SanityDocument[] }) {
                       </p>
                     ) : (
                       <p className="text-sm leading-snug text-muted group-hover:text-foreground/80 sm:leading-relaxed">
-                        Read the full write-up on this site.
+                        Open the full case study on this site.
                       </p>
                     )}
 
@@ -172,9 +175,8 @@ export function ProjectList({ projects }: { projects: SanityDocument[] }) {
                     ) : null}
 
                     <ProjectDestination
-                      linkLabel={READ_ARTICLE_LABEL}
-                      showGithubIcon={false}
-                      showArticleIcon
+                      linkLabel={EXPLORE_CASE_LABEL}
+                      leadingIcon={Compass}
                       className="mt-0 min-h-11 items-center"
                       arrowClassName="group-hover:translate-x-0.5"
                     />
