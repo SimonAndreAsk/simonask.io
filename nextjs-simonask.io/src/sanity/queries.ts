@@ -17,6 +17,10 @@ export const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | order(
   "categories": categories[]-> {
     _id,
     label
+  },
+  "technologies": technologies[]-> {
+    _id,
+    label
   }
 }`
 

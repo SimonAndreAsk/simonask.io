@@ -29,7 +29,16 @@ export const postType = defineType({
       group: 'article',
       of: [{type: 'reference', to: [{type: 'postCategory'}]}],
       description:
-        'Topics for this article. Create categories under Post categories in the sidebar, then pick them here.',
+        'Topics for this article. Use the Project category to list this post under Projects on the homepage (not Writing).',
+    }),
+    defineField({
+      name: 'technologies',
+      title: 'Technologies',
+      type: 'array',
+      group: 'article',
+      of: [{type: 'reference', to: [{type: 'projectTechnology'}]}],
+      description:
+        'Shown on the homepage Projects card when this post uses the Project category. Create entries under Technologies in the sidebar.',
     }),
     defineField({
       name: 'body',

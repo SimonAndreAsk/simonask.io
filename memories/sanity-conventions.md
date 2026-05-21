@@ -14,11 +14,11 @@ Read when: schema, Studio config, GROQ, Presentation preview, or publish/revalid
 
 ## Post document (`post`)
 
-Fields: `title`, `slug`, optional `categories` (references to `postCategory`), `body` (`blockContent`), `image` (cover — list/social only), `publishedAt`. Studio groups: **Article** / **Publishing**. Homepage writing cards show title, date, and read time only (no preview text).
+Fields: `title`, `slug`, optional `categories` (references to `postCategory`), optional `technologies` (references to `projectTechnology` — homepage Projects cards only), `body` (`blockContent`), `image` (cover — list/social only), `publishedAt`. Studio groups: **Article** / **Publishing**. Homepage writing cards show title, date, and read time only (no preview text).
 
 ## Post category document (`postCategory`)
 
-Fields: `label` only. Reusable across posts. Studio sidebar: **Taxonomies → Post categories**. Homepage: neutral pills at top of writing cards (`label-pills.tsx`, list label "Categories"). A post whose category label is exactly **`Project`** is listed under **Projects** (not Writing) and uses a project-style card linking to the article slug; article back link goes to `/#projects`.
+Fields: `label` only. Reusable across posts. Studio sidebar: **Taxonomies → Post categories**. Homepage: neutral pills at top of writing cards (`label-pills.tsx`, list label "Categories"). A post whose category label is exactly **`Project`** is listed under **Projects** (not Writing) and uses a project-style card linking to the article slug; the **Project** category pill is not shown — use **`technologies`** for pills on that card. Article back link goes to `/#projects`.
 
 **Article body** — structured blocks (not shortcodes): use **⋯** insert menu or `@selvklart/sanity-block-selector` picker on the field. Types: text (normal, H2, H3, quote), **Image** (`figure`), **Callout**, **Code** (`codeBlock`). Do not type `/callout` in prose. Schema: `blockContentType.ts`, `blockContentInput.ts`, `blocks/`. Site: `article-body.tsx`.
 

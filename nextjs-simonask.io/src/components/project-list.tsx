@@ -4,10 +4,7 @@ import { type SanityDocument } from "next-sanity";
 
 import { GithubIcon, SiteIcon } from "@/components/site-icon";
 import { LabelPills } from "@/components/label-pills";
-import {
-  postCategoriesFromSanity,
-  technologiesFromSanity,
-} from "@/lib/content-labels";
+import { technologiesFromSanity } from "@/lib/content-labels";
 import { formatDate } from "@/lib/format";
 import { isGithubProjectUrl, projectLinkLabel } from "@/lib/project-link";
 import { readingMinutes } from "@/lib/post-excerpt";
@@ -113,7 +110,7 @@ export function ProjectList({ projects }: { projects: SanityDocument[] }) {
           const slug = postSlug(project);
           const href = slug ? `/${slug}` : "#";
           const hasSlug = Boolean(slug);
-          const categories = postCategoriesFromSanity(project.categories);
+          const technologies = technologiesFromSanity(project.technologies);
           const summary = postSummaryPreview(project);
           const readMinutes =
             typeof project.readingText === "string" && project.readingText.trim()
@@ -133,8 +130,8 @@ export function ProjectList({ projects }: { projects: SanityDocument[] }) {
                 className={cardClassName}
               >
                 <div className="flex min-h-0 flex-1 flex-col">
-                  {categories.length > 0 ? (
-                    <LabelPills labels={categories} listLabel="Categories" />
+                  {technologies.length > 0 ? (
+                    <LabelPills labels={technologies} />
                   ) : null}
                   <div className="mt-auto flex flex-col gap-1.5 pt-14">
                     <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
