@@ -1,0 +1,20 @@
+import Script from "next/script";
+
+/** Consent Mode v2 defaults — must run before GTM / GA4 (plan Step 3). */
+export function ConsentDefaults() {
+  return (
+    <Script id="consent-defaults" strategy="beforeInteractive">
+      {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          wait_for_update: 500
+        });
+      `}
+    </Script>
+  );
+}

@@ -4,6 +4,9 @@ import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { VisualEditing } from "next-sanity/visual-editing";
 
+import { ConsentDefaults } from "@/components/consent-defaults";
+import { CookieConsent } from "@/components/cookie-consent";
+import { GoogleTagManagerHead, GoogleTagManagerNoscript } from "@/components/google-tag-manager";
 import { DisableDraftMode } from "@/components/disable-draft-mode";
 import { ScrollToHash } from "@/components/scroll-to-hash";
 import { SiteFooter } from "@/components/site-footer";
@@ -49,12 +52,18 @@ export default async function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
+      <head>
+        <ConsentDefaults />
+        <GoogleTagManagerHead />
+      </head>
       <body className="flex min-h-full flex-col">
+        <GoogleTagManagerNoscript />
         <ScrollToHash />
         <StagingBanner />
         <SiteHeader />
         {children}
         <SiteFooter />
+        <CookieConsent />
         <SpeedInsights />
         {isDraftMode && (
           <>

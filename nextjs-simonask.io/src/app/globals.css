@@ -62,6 +62,46 @@ body {
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
+@keyframes cookie-consent-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(1.25rem) scale(0.94);
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.04),
+      0 0 0 0 color-mix(in oklab, var(--accent) 0%, transparent);
+  }
+  55% {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+      0 12px 36px rgba(0, 0, 0, 0.12),
+      0 0 0 3px color-mix(in oklab, var(--accent) 40%, transparent);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.cookie-consent-panel {
+  animation: cookie-consent-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cookie-consent-panel {
+    animation: cookie-consent-enter-reduced 0.25s ease-out both;
+  }
+}
+
+@keyframes cookie-consent-enter-reduced {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Home intro links: straight bar, slightly rounded caps (not rounded link box) */
 .intro-inline-link {
   position: relative;

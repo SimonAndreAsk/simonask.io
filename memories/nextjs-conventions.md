@@ -6,7 +6,7 @@ Read when: editing the public site — pages, components, styles, or Sanity cons
 
 | Area | Path |
 |------|------|
-| Routes | `src/app/page.tsx`, `src/app/[slug]/page.tsx`, `src/app/not-found.tsx` |
+| Routes | `src/app/page.tsx`, `src/app/[slug]/page.tsx`, `src/app/privacy/page.tsx`, `src/app/not-found.tsx` |
 | Layout + fonts | `src/app/layout.tsx` |
 | Global styles | `src/app/globals.css` |
 | Components | `src/components/` |
@@ -47,7 +47,11 @@ import { POSTS_QUERY, PROJECTS_QUERY } from "@/sanity/queries";
 
 | Component | Role |
 |-----------|------|
-| `site-header`, `site-footer` | Chrome; footer `/#get-in-touch` — center-column layout (portrait + form); no side quick-links column |
+| `site-header`, `site-footer` | Chrome; footer `/#get-in-touch` — center-column layout (portrait + form); `/privacy` link in footer bar |
+| `consent-defaults`, `cookie-consent` | Consent Mode v2 defaults + DIY banner; `localStorage` key `cookie_consent_v1` |
+| `google-tag-manager` | GTM head + noscript; `NEXT_PUBLIC_GTM_WEB_CONTAINER_ID`; loads after consent defaults |
+| Web GA4 (GTM UI) | `server_container_url` → `https://serverside.simonask.io` (Step 13); not in layout code |
+| `open-cookie-settings-button` | Reopens banner via `cookie-settings-open` event (footer + `/privacy`) |
 | `section-link` | In-page hash navigation with smooth scroll |
 | `site-icon` | Lucide icons (mail, phone, arrows) + matching stroke brand SVGs (GitHub, LinkedIn); shared size/stroke + `iconLinkClass` |
 | `email-icon-link` | Mailto contact (icon link) |

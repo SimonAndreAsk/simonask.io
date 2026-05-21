@@ -6,6 +6,7 @@ import { OpenForWorkLabel } from "@/components/open-for-work-label";
 import { EmailIconLink } from "@/components/email-icon-link";
 import { GithubIconLink } from "@/components/github-icon-link";
 import { LinkedinIconLink } from "@/components/linkedin-icon-link";
+import { OpenCookieSettingsButton } from "@/components/open-cookie-settings-button";
 import { PhoneContactLink } from "@/components/phone-contact-link";
 import { SectionLink } from "@/components/section-link";
 import { SITE_SECTIONS, sectionHref, type SiteSectionId } from "@/lib/sections";
@@ -78,7 +79,15 @@ export function SiteFooter() {
             <PhoneContactLink showLabel />
           </div>
 
-          <p className="mt-6 text-xs text-muted tabular-nums">© {year} Simon Ask</p>
+          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-between">
+            <p className="text-xs text-muted tabular-nums">© {year} Simon Ask</p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link href="/privacy" className={footerLinkClass}>
+                Privacy Policy
+              </Link>
+              <OpenCookieSettingsButton className={`${footerLinkClass} hover:underline`} />
+            </div>
+          </div>
         </div>
       </div>
     </footer>
