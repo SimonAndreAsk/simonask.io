@@ -64,6 +64,7 @@ For the **contact form**, also set `RESEND_API_KEY` (see `.env.example`). Withou
 | `NEXT_PUBLIC_SANITY_DATASET` | ✓ | ✓ |
 | `SANITY_API_READ_TOKEN` | — | Viewer token |
 | `NEXT_PUBLIC_SITE_ENV` | — | `staging` |
+| `NEXT_PUBLIC_GTM_WEB_CONTAINER_ID` | ✓ | ✓ (`GTM-KR894J8P`) |
 | `SANITY_REVALIDATE_SECRET` | ✓ | ✓ |
 | `NEXT_PUBLIC_SANITY_STUDIO_URL` | optional | optional |
 | `RESEND_API_KEY` | ✓ | ✓ |

@@ -33,13 +33,12 @@ export function writeStoredConsent(choice: CookieConsentChoice): void {
 
 function ensureGtag(): (...args: unknown[]) => void {
   window.dataLayer = window.dataLayer ?? [];
-  const w = window as Window & { gtag?: (...args: unknown[]) => void };
-  if (!w.gtag) {
-    w.gtag = function gtag(...args: unknown[]) {
+  if (!window.gtag) {
+    window.gtag = function gtag(...args: unknown[]) {
       window.dataLayer!.push(args);
     };
   }
-  return w.gtag;
+  return window.gtag;
 }
 
 export function applyGtagConsent(analyticsGranted: boolean): void {
