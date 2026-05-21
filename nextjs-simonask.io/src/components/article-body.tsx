@@ -37,14 +37,27 @@ function resolveCodeBlock(block: CodeBlockValue) {
   };
 }
 
-const components: PortableTextComponents = {
+function buildComponents(
+  headingIds: Record<string, string> | undefined,
+): PortableTextComponents {
+  return {
   block: {
-    h2: ({ children }) => (
-      <h2 className="article-h2">{children}</h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="article-h3">{children}</h3>
-    ),
+    h2: ({ children, value }) => {
+      const id = value?._key ? headingIds?.[value._key] : undefined;
+      return (
+        <h2 id={id} className="article-h2">
+          {children}
+        </h2>
+      );
+    },
+    h3: ({ children, value }) => {
+      const id = value?._key ? headingIds?.[value._key] : undefined;
+      return (
+        <h3 id={id} className="article-h3">
+          {children}
+        </h3>
+      );
+    },
     blockquote: ({ children }) => (
       <blockquote className="article-blockquote">{children}</blockquote>
     ),
@@ -123,14 +136,24 @@ const components: PortableTextComponents = {
       );
     },
   },
-};
+  };
+}
 
-export function ArticleBody({ value }: { value: unknown }) {
+export function ArticleBody({
+  value,
+  headingIds,
+}: {
+  value: unknown;
+  headingIds?: Record<string, string>;
+}) {
   if (!Array.isArray(value)) return null;
 
   return (
     <div className="article-body">
-      <PortableText value={value} components={components} />
+      <PortableText
+        value={value}
+        components={buildComponents(headingIds)}
+      />
     </div>
   );
 }

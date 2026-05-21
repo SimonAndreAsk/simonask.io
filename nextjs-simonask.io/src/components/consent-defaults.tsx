@@ -1,6 +1,6 @@
 import Script from "next/script";
 
-/** Consent Mode v2 defaults — must run before GTM / GA4 (plan Step 3). */
+/** Consent Mode v2 defaults — must run before GTM **/
 export function ConsentDefaults() {
   return (
     <Script id="consent-defaults" strategy="beforeInteractive">

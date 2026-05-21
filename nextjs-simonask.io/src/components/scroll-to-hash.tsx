@@ -5,13 +5,11 @@ import { useEffect } from "react";
 
 import { scrollToSection } from "@/lib/scroll-to-section";
 
-/** Smooth scroll to URL hash after landing on the home page. */
+/** Smooth scroll to URL hash after navigation (home sections, article headings). */
 export function ScrollToHash() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (pathname !== "/") return;
-
     const run = () => {
       const id = window.location.hash.replace(/^#/, "");
       if (id) scrollToSection(id);

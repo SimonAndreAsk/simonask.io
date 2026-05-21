@@ -67,7 +67,8 @@ import { POSTS_QUERY, PROJECTS_QUERY } from "@/sanity/queries";
 | `contact-form` | Name / email / message form in footer → `POST /api/contact` — Resend/Vercel: `memories/contact-form.md` |
 | `experience-section`, `education-section` | Home CV blocks (`/#experience`, `/#education`); experience from Sanity |
 | `profile-timeline` | Experience and education cards — same inner layout as before (title + period row), no logos |
-| `article-body` | Portable text rendering |
+| `article-body` | Portable text rendering; `headingIds` for in-article anchor targets |
+| `article-table-of-contents` | Auto TOC from post h2/h3 (`article-headings.ts`) |
 | `hero-intro-meta`, `location-label`, `open-for-work-label` | Hero location + hiring status |
 
 ## Do / Don't

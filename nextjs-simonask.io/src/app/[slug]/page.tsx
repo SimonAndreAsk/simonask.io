@@ -3,6 +3,11 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 import { ArticleBody } from "@/components/article-body";
+import { ArticleTableOfContents } from "@/components/article-table-of-contents";
+import {
+  extractArticleHeadings,
+  headingIdsByBlockKey,
+} from "@/lib/article-headings";
 import { SectionLink } from "@/components/section-link";
 import { formatDate } from "@/lib/format";
 import { client } from "@/sanity/client";
@@ -48,6 +53,9 @@ export default async function PostPage({ params }: PageProps) {
   );
 
   if (!post) notFound();
+
+  const headings = extractArticleHeadings(post.body);
+  const headingIds = headingIdsByBlockKey(headings);
 
   const isDraft = post._id.startsWith("drafts.");
   const postImageUrl = post.image
@@ -96,7 +104,11 @@ export default async function PostPage({ params }: PageProps) {
           />
         )}
 
-        <ArticleBody value={post.body} />
+        {headings.length > 0 ? (
+          <ArticleTableOfContents headings={headings} />
+        ) : null}
+
+        <ArticleBody value={post.body} headingIds={headingIds} />
       </article>
     </main>
   );
