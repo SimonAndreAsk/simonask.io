@@ -24,7 +24,12 @@ export default function PrivacyPage() {
         <div className="article-body">
           <p className="article-p">
             I believe in keeping things transparent. This page explains what happens to your
-            data when you visit my personal site.
+            data when you visit my personal site. For a list of cookies and how to control
+            them, see the{" "}
+            <Link href="/cookies" className="article-link">
+              Cookie Policy
+            </Link>
+            .
           </p>
 
           <h2 className="article-h2">What I collect &amp; why</h2>
@@ -74,7 +79,13 @@ export default function PrivacyPage() {
             <OpenCookieSettingsButton />
           </p>
 
-          <p className="article-p mt-10">
+          <p className="article-p mt-10 flex flex-wrap gap-x-4 gap-y-2">
+            <Link
+              href="/cookies"
+              className="text-sm text-muted transition-colors hover:text-foreground"
+            >
+              Cookie Policy →
+            </Link>
             <Link
               href="/"
               className="text-sm text-muted transition-colors hover:text-foreground"

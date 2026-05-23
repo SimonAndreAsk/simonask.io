@@ -85,6 +85,9 @@ export function SiteFooter() {
               <Link href="/privacy" className={footerLinkClass}>
                 Privacy Policy
               </Link>
+              <Link href="/cookies" className={footerLinkClass}>
+                Cookie Policy
+              </Link>
               <OpenCookieSettingsButton className={`${footerLinkClass} hover:underline`} />
             </div>
           </div>

@@ -65,6 +65,10 @@ export function CookieConsent() {
         optional, anonymous usage stats. No ads. Read the{" "}
         <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground">
           Privacy Policy
+        </Link>{" "}
+        and{" "}
+        <Link href="/cookies" className="underline underline-offset-2 hover:text-foreground">
+          Cookie Policy
         </Link>
         .
       </p>

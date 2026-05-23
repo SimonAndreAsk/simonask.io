@@ -6,7 +6,7 @@ Read when: editing the public site — pages, components, styles, or Sanity cons
 
 | Area | Path |
 |------|------|
-| Routes | `src/app/page.tsx`, `src/app/[slug]/page.tsx`, `src/app/privacy/page.tsx`, `src/app/not-found.tsx` |
+| Routes | `src/app/page.tsx`, `src/app/[slug]/page.tsx`, `src/app/privacy/page.tsx`, `src/app/cookies/page.tsx`, `src/app/not-found.tsx` |
 | Layout + fonts | `src/app/layout.tsx` |
 | Global styles | `src/app/globals.css` |
 | Components | `src/components/` |
