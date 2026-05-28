@@ -49,8 +49,8 @@ import { POSTS_QUERY, PROJECTS_QUERY } from "@/sanity/queries";
 |-----------|------|
 | `site-header`, `site-footer` | Chrome; footer `/#get-in-touch` — center-column layout (portrait + form); `/privacy` link in footer bar |
 | `consent-defaults`, `cookie-consent` | Consent Mode v2 defaults, gtag init (`G-12345` + `server_container_url`), DIY banner; `cookie_consent_v1` |
-| `google-tag-manager` | GTM head + noscript; `NEXT_PUBLIC_GTM_WEB_CONTAINER_ID`; loads after `consent-defaults` |
-| Server GTM | `NEXT_PUBLIC_GTM_SERVER_URL` → `server_container_url` in `consent-defaults.tsx` (default `https://serverside.simonask.io`) |
+| `google-tag-manager` | Server-side GTM loader (`NEXT_PUBLIC_GTM_SERVER_URL` + `NEXT_PUBLIC_GTM_LOADER_*`) + noscript (`NEXT_PUBLIC_GTM_WEB_CONTAINER_ID`); loads after `consent-defaults` |
+| Server GTM | `NEXT_PUBLIC_GTM_SERVER_URL` → loader + `server_container_url` in `consent-defaults.tsx` (default `https://serverside.simonask.io`) |
 | `open-cookie-settings-button` | Reopens banner via `cookie-settings-open` event (footer + `/privacy`) |
 | `section-link` | In-page hash navigation with smooth scroll |
 | `site-icon` | Lucide icons (mail, phone, arrows) + matching stroke brand SVGs (GitHub, LinkedIn); shared size/stroke + `iconLinkClass` |
