@@ -44,6 +44,7 @@ export function ConsentDefaults() {
 
         gtag('js', new Date());
         gtag('config', '${measurementId}', {
+          'send_page_view': false,
           'server_container_url': '${serverUrl}'
         });
       `}
