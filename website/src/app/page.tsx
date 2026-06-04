@@ -1,0 +1,118 @@
+import { type SanityDocument } from "next-sanity";
+
+import { EducationSection } from "@/components/home/education-section";
+import { ExperienceSection } from "@/components/home/experience-section";
+import { HeroContactActions } from "@/components/home/hero-contact-actions";
+import { HeroIntroMeta, HeroMobileLocationRow } from "@/components/home/hero-intro-meta";
+import { PostList } from "@/components/home/post-list";
+import { ProjectList } from "@/components/home/project-list";
+import { SectionLink } from "@/components/shared/section-link";
+import {
+  mergeHomepageProjectsByDate,
+  partitionPostsForHomepage,
+} from "@/lib/content-labels";
+import { experienceEntriesFromSanity } from "@/lib/experience";
+import { sanityFetch } from "@/lib/sanity/load";
+import { EXPERIENCE_QUERY, POSTS_QUERY, PROJECTS_QUERY } from "@/lib/sanity/queries";
+import { SITE_SECTIONS, sectionHref } from "@/lib/sections";
+
+const introLinkClass = "intro-inline-link";
+
+const options = { next: { revalidate: 30 } };
+
+export default async function HomePage() {
+  const [posts, projects, experienceDocs] = await Promise.all([
+    sanityFetch<SanityDocument[]>(POSTS_QUERY, {}, options),
+    sanityFetch<SanityDocument[]>(PROJECTS_QUERY, {}, options),
+    sanityFetch<SanityDocument[]>(EXPERIENCE_QUERY, {}, options),
+  ]);
+  const experience = experienceEntriesFromSanity(experienceDocs);
+  const { projectPosts, writingPosts } = partitionPostsForHomepage(posts);
+  const homepageProjects = mergeHomepageProjectsByDate(projects, projectPosts);
+
+  return (
+    <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-14 sm:px-8 sm:py-20">
+      <section className="mb-20 sm:mb-24">
+        <div className="flex flex-col">
+          <div className="space-y-3">
+            <h1
+              id="intro"
+              className="page-section-title text-center font-display text-4xl leading-[1.12] tracking-tight text-foreground sm:text-left sm:text-5xl"
+            >
+              Hi, I&apos;m Simon.
+            </h1>
+            <HeroIntroMeta />
+          </div>
+
+          <div className="mt-0 space-y-5 sm:mt-6 sm:space-y-3">
+            <p className="mx-auto max-w-lg text-center text-base leading-relaxed text-muted sm:mx-0 sm:text-left sm:text-lg">
+              Welcome to my digital home. Feel free to explore my{" "}
+              <SectionLink href={sectionHref(SITE_SECTIONS.projects)} className={introLinkClass}>
+                projects
+              </SectionLink>
+              {", "}
+              <SectionLink href={sectionHref(SITE_SECTIONS.writing)} className={introLinkClass}>
+                writing
+              </SectionLink>
+              {", "}
+              <SectionLink href={sectionHref(SITE_SECTIONS.experience)} className={introLinkClass}>
+                experience
+              </SectionLink>
+              {", "}
+              <SectionLink href={sectionHref(SITE_SECTIONS.education)} className={introLinkClass}>
+                education
+              </SectionLink>
+              {" or "}
+              <SectionLink
+                href={sectionHref(SITE_SECTIONS.getInTouch)}
+                className={introLinkClass}
+                contactClickLocation="body"
+              >
+                get in touch with me
+              </SectionLink>
+              .
+            </p>
+            <HeroMobileLocationRow />
+          </div>
+
+          <HeroContactActions className="mt-12 sm:mt-10" />
+        </div>
+      </section>
+
+      <section className="mb-20 sm:mb-24">
+        <h2
+          id="projects"
+          className="page-section-title font-display text-2xl tracking-tight text-foreground"
+        >
+          Projects
+        </h2>
+        <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted">
+          Things I&apos;ve shipped or shaped — each entry links out to a repo,
+          demo, or write-up.
+        </p>
+        <div className="mt-8">
+          <ProjectList projects={homepageProjects} />
+        </div>
+      </section>
+
+      <section className="mb-20 sm:mb-24">
+        <h2
+          id="writing"
+          className="page-section-title font-display text-2xl tracking-tight text-foreground"
+        >
+          Writing
+        </h2>
+        <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted">
+          Essays and build logs you can read in full — pick a title below.
+        </p>
+        <div className="mt-8">
+          <PostList posts={writingPosts} />
+        </div>
+      </section>
+
+      <ExperienceSection entries={experience} />
+
+      <EducationSection />
+    </main>
+  );
+}

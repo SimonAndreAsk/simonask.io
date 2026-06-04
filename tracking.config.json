@@ -1,7 +1,0 @@
-{
-  "property": "simonask-io",
-  "trackingRepo": "SimonAndreAsk/tracking",
-  "trackingRef": "main",
-  "contractsGlob": "datalayer-contracts/extensions/simonask-io/*-contract.json",
-  "fixturePaths": ["tests/fixtures/datalayer"]
-}
